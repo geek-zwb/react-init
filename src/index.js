@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
+import {Route} from 'react-router-dom';
+import {ConnectedRouter} from 'react-router-redux';
+import registerServiceWorker from './registerServiceWorker';
+import {history} from './redux/store';
 import store from './redux/store';
 import Dashboard from './modules/dashboard/Dashboard';
-import registerServiceWorker from './registerServiceWorker';
+import App from './App';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Dashboard />
+    <ConnectedRouter history={history}>
+      <div>
+        <Route exact path="/" component={App} />
+        <Route path="/dashboard" component={Dashboard} />
+      </div>
+    </ConnectedRouter>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();
