@@ -4,14 +4,15 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {dashboardTestRequest} from './actions';
 
 import './Dashboard.css';
 import logo from './logo.svg';
 
 class Dashboard extends Component {
-
   componentDidMount() {
+    // request testData
     this.props.dashboardTestRequest();
   }
 
@@ -23,12 +24,22 @@ class Dashboard extends Component {
           <h2>Now you are in dashboard.</h2>
         </div>
         <p className="Dashboard-intro">
-          the testData : <code>{this.props.$$testData}</code>
+          两秒后通过saga得到 dashboardTestRequest 后的数据 : <code>{this.props.$$testData}</code>
         </p>
       </div>
     );
   };
 }
+
+/**
+ * props 类型检测
+ * @type {{$$testData, $$dashboardReducer, dashboardTestRequest}}
+ */
+Dashboard.propTypes = {
+  $$testData: PropTypes.string.isRequired,
+  $$dashboardReducer: PropTypes.object.isRequired,
+  dashboardTestRequest: PropTypes.func.isRequired
+};
 
 function mapStateToProps(state) {
   return {
@@ -45,4 +56,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+// connect store with component
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

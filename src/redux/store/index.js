@@ -6,12 +6,17 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {combineReducers} from 'redux-immutable';
 import createHistory from 'history/createBrowserHistory';
 import {routerReducer, routerMiddleware} from 'react-router-redux';
+import createSagaMiddleware from 'redux-saga';
 import reducers from '../reducers';
+import saga from '../sagas';
 
 // use browser history
 export const history = createHistory();
 
-const middlewares = [routerMiddleware(history)];
+// create saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+const middlewares = [routerMiddleware(history), sagaMiddleware];
 
 const rootReducer = combineReducers({
   ...reducers,
@@ -19,5 +24,7 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(rootReducer, compose(applyMiddleware(...middlewares), window.devToolsExtension && window.devToolsExtension()));
+
+sagaMiddleware.run(saga);
 
 export default store;

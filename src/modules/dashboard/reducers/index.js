@@ -11,7 +11,7 @@ const initState = {
 };
 const $$initState = fromJS(initState);
 
-const dashboardReducer = (state = $$initState , action) => {
+const dashboardReducer = (state = $$initState, action) => {
   switch (action.type) {
     case DASHBOARD_TEST_REQUEST:
       return fromJS({
@@ -19,10 +19,10 @@ const dashboardReducer = (state = $$initState , action) => {
         status: 'request'
       });
     case DASHBOARD_TEST_SUCCESS:
-      return {
-        testData: 'this is data',
+      return fromJS({
+        testData: action.payload,
         status: 'success'
-      };
+      });
     case DASHBOARD_TEST_FAILURE:
       return {
         testData: 'this is data',

@@ -9,6 +9,9 @@ import store from './redux/store';
 import Dashboard from './modules/dashboard/Dashboard';
 import App from './App';
 
+// ================================
+// 将根组件挂载到 DOM，启动！
+// ================================
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
