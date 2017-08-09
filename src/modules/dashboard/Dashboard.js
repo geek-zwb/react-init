@@ -20,11 +20,8 @@ class Dashboard extends Component {
       <div className="Dashboard">
         <div className="Dashboard-header">
           <img src={logo} className="Dashboard-logo" alt="logo"/>
-          <h2>Welcome to React</h2>
+          <h2>Now you are in dashboard.</h2>
         </div>
-        <p>
-          Now you are in dashboard.
-        </p>
         <p className="Dashboard-intro">
           the testData : <code>{this.props.$$testData}</code>
         </p>
