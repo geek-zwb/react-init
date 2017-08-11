@@ -14,6 +14,32 @@ class Dashboard extends Component {
   componentDidMount() {
     // request testData
     this.props.dashboardTestRequest();
+    this.segment();
+  }
+
+  segment(timeBlocks = []) {
+    var blocks = [];
+    var blocksLength = -1;
+    // time 分段
+    timeBlocks.forEach(function (value, index){
+        if(timeBlocks[index - 1] === value - 1) {
+          blocks[blocksLength].push(value);
+        } else {
+          blocksLength += 1;
+          blocks[blocksLength] = [value];
+        }
+    });
+
+    //1 和 24 同时存在？
+    var newBlocks = blocks.slice(0);
+    if(blocks[0] && blocks[0].includes(1) && blocks[blocksLength].includes(24)) {
+      newBlocks = blocks.slice(0, blocksLength);
+      newBlocks[0] = blocks[blocksLength].concat(blocks[0]);
+    }
+    
+    //console.log('newBlocks', newBlocks);
+    // 返回分段的二维数组
+    return newBlocks;
   }
 
   render() {
