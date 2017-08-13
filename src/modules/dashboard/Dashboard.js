@@ -44,12 +44,12 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className="Dashboard">
-        <div className="Dashboard-header">
-          <img src={logo} className="Dashboard-logo" alt="logo"/>
+      <div className="dashboard">
+        <div className="dashboard-header">
+          <img src={logo} className="dashboard-logo" alt="logo"/>
           <h2>Now you are in dashboard.</h2>
         </div>
-        <p className="Dashboard-intro">
+        <p className="dashboard-intro">
           两秒后通过saga得到 dashboardTestRequest 后的数据 : <code>{this.props.$$testData}</code>
         </p>
       </div>
