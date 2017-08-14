@@ -6,9 +6,9 @@ import {ConnectedRouter} from 'react-router-redux';
 import registerServiceWorker from './registerServiceWorker';
 import {history} from './redux/store';
 import store from './redux/store';
-import Dashboard from './modules/dashboard/Dashboard';
+import Dashboard from './modules/Dashboard';
 import App from './App';
-import NoMatch from './common/noMatch';
+import NoMatch from './common/NoMatch';
 
 // ================================
 // 将根组件挂载到 DOM，启动！

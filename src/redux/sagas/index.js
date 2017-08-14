@@ -6,7 +6,7 @@
 import {fork, all} from 'redux-saga/effects';
 
 // 异步逻辑
-import {watchLoadDashboard} from '../../modules/dashboard/sagas';
+import {watchLoadDashboard} from '../../modules/Dashboard/sagas';
 
 // 单一进入点， 启动所有 saga
 export default function* root() {

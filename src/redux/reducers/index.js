@@ -4,7 +4,7 @@
  */
 // import {combineReducers} from 'redux-immutable';
 
-import dashboardReducer from '../../modules/dashboard/reducers';
+import dashboardReducer from '../../modules/Dashboard/reducers';
 
 /*const rootReducer = combineReducers({
   dashboardReducer
