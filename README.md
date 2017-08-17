@@ -13,6 +13,44 @@
 - immutable
 - redux-immutable
 
+## 开发流程
+> 为了规范流程和统一编码风格，以及以后更好维护。我们遵从以下原则：
+
+1. immutable的使用
+
+    除了request请求后端， 以及组件内部（不需要跟redux或者其他组件交互）可以使用JS原生数据格式(JSD)，其他在原则上统一使用immutable数据格式。
+
+    解释：
+
+    ![react与redux交互流程](http://yunlaiwu.github.io/blog/img/react+redux+immutablejs/flow.png)
+
+    - 在 React 视图里，props 其实就来自于 Redux 维护的全局的 state 的，所以 props 中的每一项一定是 immutable 的。
+    - 在 React 视图里，组件自己维护的局部 state 如果是用来提交到 store 的， 必须为 immutable 的，否则不强制。
+    - 从视图层向同步和异步 action 发送的数据（A/B），必须是 immutable 的。
+    - Action 提交给 reducer 的数据（C/D），必须是 immutable 的。
+    - reducer 处理后所得 state (E)当然一定是 immutable 的。
+    这样似乎看起来，所有地方都是 immutable 的，但是其实异步 action 和服务器的交互当然是 JSD （F）。换句话说，我们要求，除了向服务端发送数据请求的时候，其他位置，不允许出现toJS的代码。而接收到服务端的数据后，在流转入全局 state 之前，统一转化为 immutable 数据。
+
+    为什么要做这种统一呢？是因为：
+
+    - 避免 JSD 和 immutable 的混用导致出错；
+    - 统一 JSD 和 immutable 的转化路径。比如你在局部 state 里不使用 immutable，但是这些局部的 state 很可能被用来通过异步 action 提交的服务端，这样在数据流里就会同时存在 JSD 和 immutable，这对于代码的维护性是一种灾难。
+
+    **更多react、redux、immutable 配合使用的方式与解释可参考(仅作参考，因为库一直在升级，如 prop-types 的验证等)：**
+    - [如何用React+Redux+ImmutableJS进行SPA开发](https://yunlaiwu.github.io/blog/2016/12/01/react+redux+immutablejs/)
+    - [immutable.js 在React、Redux中的实践以及常用API简介](https://yq.aliyun.com/articles/69516)
+
+2. 代码按照业务进行划分，而不是按功能。业务中再按功能分。
+    init 中的文件划分想法来自于之前使用 angular 中的实践。
+
+    **也可以参考下面文章**
+    - [如何合理布置React/Redux的目录结构](https://juejin.im/post/58cbfcb05c497d0057b9b228)
+
+## 剩余问题
+- 数据模拟问题
+- style的组织。sass,less or cssModule or styleComponent ?
+- code split (按需加载的必要性？实现？)
+- 单元测试与集成测试
 
 ## Folder Structure
 
