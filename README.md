@@ -12,6 +12,7 @@
 - redux-saga
 - immutable
 - redux-immutable
+- styled-components
 
 ## 开发流程
 > 为了规范流程和统一编码风格，以及以后更好维护。我们遵从以下原则：
