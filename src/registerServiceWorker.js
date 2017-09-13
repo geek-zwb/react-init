@@ -43,6 +43,10 @@ export default function register() {
   }
 }
 
+/**
+ *
+ * @param swUrl
+ */
 function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
