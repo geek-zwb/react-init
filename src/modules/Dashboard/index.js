@@ -14,6 +14,7 @@ import logo from './logo.svg';
 //============ styled components
 const DashboardBox = styled.div`
   text-align: center;
+  padding: 10px;
 `;
 const DashboardHeader = styled.div`
   background-color: #222;
