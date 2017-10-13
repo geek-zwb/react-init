@@ -169,9 +169,16 @@ module.exports = {
 
           compact: true,
 
-          // antd 的按需加载
-          presets: ["es2015", "react", "stage-3"],
+          presets: [
+            ['env', {
+              "targets": {
+                "browsers": ["last 2 versions", "ie > 9"]
+              }
+            }],
+            //'react'
+          ],
           plugins: [
+          // antd 的按需加载
             ["import", {"libraryName": "antd", "style": "css"}],
             "transform-runtime",
             "transform-decorators-legacy"
