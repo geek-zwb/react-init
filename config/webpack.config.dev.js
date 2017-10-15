@@ -9,6 +9,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -183,7 +184,7 @@ module.exports = {
             //'react'
           ],
           "plugins": [
-            // antd 的按需加载
+          // antd 的按需加载
             ["import", {"libraryName": "antd", "style": "css"}],
             "transform-runtime",
             "transform-decorators-legacy"
@@ -242,6 +243,10 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
     }),
+    // copy static or global
+    new CopyWebpackPlugin([
+      { from: 'config.js', to: 'config.js' },
+    ]),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     // Makes some environment variables available to the JS code, for example:
