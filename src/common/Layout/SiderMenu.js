@@ -17,7 +17,7 @@ class SiderMenu extends Component {
   onSiderClick(e) {
     const {location, history} = this.props;
     if (location.pathname === e.key) return;
-    history.push(e.key)
+    history.push(e.key);
   }
 
   render() {
@@ -65,7 +65,7 @@ class SiderMenu extends Component {
           </SubMenu>
         </Menu>
       </Sider>
-    )
+    );
   }
 }
 

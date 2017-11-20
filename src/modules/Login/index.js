@@ -117,7 +117,7 @@ class Login extends Component {
         </LoginBox>
       </LoginPage>
     );
-  };
+  }
 }
 
 Login.propTypes = {

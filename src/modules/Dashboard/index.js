@@ -43,7 +43,7 @@ class Dashboard extends Component {
           两秒后通过saga得到 dashboardTestRequest 后的数据 : <code>{this.props.$$testData}</code>
       </DashboardBox>
     );
-  };
+  }
 }
 
 /**

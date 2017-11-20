@@ -90,7 +90,7 @@ class RightMenu extends Component {
         </MenuContent>
       </RightMenuBox>
     );
-  };
+  }
 }
 
 RightMenu.propTypes = {

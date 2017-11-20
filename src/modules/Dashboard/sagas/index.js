@@ -19,7 +19,7 @@ function getData(data) {
     setTimeout(function () {
       resolve('get data success');
     }, 2000);
-  })
+  });
 }
 
 /**
@@ -40,6 +40,7 @@ function* dashboardRequest(data) {
  * export saga
  */
 export function* watchLoadDashboard() {
+  /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
   while (true) {
     // 监听 DASHBOARD_TEST_REQUEST action by name
     yield take(DASHBOARD_TEST_REQUEST);

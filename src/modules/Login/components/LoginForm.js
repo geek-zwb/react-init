@@ -39,7 +39,7 @@ class LoginForm extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       message: nextProps.message
-    })
+    });
   }
 
   render() {
@@ -79,7 +79,7 @@ class LoginForm extends Component {
         </div>
       </Form>
     );
-  };
+  }
 }
 
 LoginForm.propTypes = {

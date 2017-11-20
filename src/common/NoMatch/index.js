@@ -9,7 +9,7 @@ const NoMatch = () => {
     <div>
         <h1 style={{marginTop: '300px', textAlign: 'center'}}>404 No Found !</h1>
     </div>
-  )
+  );
 };
 
 export default NoMatch;

@@ -14,5 +14,5 @@ export default function* root() {
   yield all([
     fork(watchLoadDashboard),
     fork(watchLogin)
-  ])
+  ]);
 }

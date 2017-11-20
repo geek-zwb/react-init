@@ -14,7 +14,7 @@ export const login = (credentials) => {
   return {
     type: LOGIN_REQUEST,
     payload: credentials
-  }
+  };
 };
 
 /**
@@ -26,7 +26,7 @@ export const loginSuccess = (payload) => {
   return {
     type: LOGIN_SUCCESS,
     payload
-  }
+  };
 };
 
 /**
@@ -38,5 +38,5 @@ export const loginFailed = (payload) => {
   return {
     type: LOGIN_FAILED,
     payload
-  }
+  };
 };
