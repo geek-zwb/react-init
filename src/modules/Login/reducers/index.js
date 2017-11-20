@@ -30,7 +30,7 @@ const authReducer = ($$state = $$initialState, {type, payload = {}}) => {
     case LOGIN_SUCCESS: {
       store.set('access_token', payload.access_token);
       store.set('refresh_token', payload.refresh_token);
-      return $$state.set('status', 'success').set('isAuthenticated', true);
+      return $$state.set('status', 'success').set('isAuthenticated', true).set('message', '');
     }
     case LOGIN_FAILED: {
       store.clearAll();

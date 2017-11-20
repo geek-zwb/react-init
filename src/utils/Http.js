@@ -17,24 +17,55 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       //store.dispatch(authLogout())
+      store.clearAll();
+      window.location.href = '/login';
     }
     return Promise.reject(error);
   });
+
+/**
+ * Encode url and params to url with query string
+ * @param {String} url
+ * @param {Object} params
+ * @return {String} url
+ */
+function urlBuilder(url, params) {
+  let newUrl = url;
+  if (params) {
+    if (typeof params === 'string') {
+      newUrl += '?';
+      newUrl += params;
+    } else if (typeof params === 'object' && Object.keys(params).length > 0) {
+      newUrl += '?';
+      /*if (Array.isArray(params)) {
+        newUrl += params.join('&');
+      }*/
+      for (let prop in params) {
+        //去除encodeURIComponent,如果确定要encode,自行在payload中加入
+        newUrl += prop + '=' + (params[prop] ? params[prop] : '') + '&';
+      }
+      newUrl = newUrl.replace(/&$/, '');
+    }
+    return newUrl;
+  } else {
+    return newUrl;
+  }
+}
 
 export default class HTTPUtil {
   static setOptions() {
     if (store.get('access_token')) {
       axios.defaults.headers.common.Authorization = `Bearer ${store.get('access_token')}`;
     }
-     // axios.defaults.headers.['Content-Type'] = 'application/x-www-form-urlencoded';
+    // axios.defaults.headers.['Content-Type'] = 'application/x-www-form-urlencoded';
   }
 
-  static get(url, config) {
+  static get(url, params, config) {
+    const newUrl = urlBuilder(url, params);
     HTTPUtil.setOptions();
-    return axios.get(url, config)
+    return axios.get(newUrl, config)
       .then(function (response) {
-        console.log('response', response);
-        return response;
+        return response.data;
       })
       .catch(function (error) {
         return {
@@ -45,7 +76,6 @@ export default class HTTPUtil {
   }
 
   static post(url, data, config) {
-
     HTTPUtil.setOptions();
     return axios.post(url, data, config)
       .then(function (response) {
@@ -61,11 +91,29 @@ export default class HTTPUtil {
 
   static put(url, data, config) {
     HTTPUtil.setOptions();
-    return axios.put(url, data, config);
+    return axios.put(url, data, config)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        return {
+          status: 'error',
+          message: error
+        };
+      });
   }
 
   static delete(url, config) {
     HTTPUtil.setOptions();
-    return axios.delete(url, config);
+    return axios.delete(url, config)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        return {
+          status: 'error',
+          message: error
+        };
+      });
   }
 }

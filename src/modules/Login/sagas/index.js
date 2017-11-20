@@ -8,7 +8,11 @@ import HTTPUtil from '../../../utils/Http';
 import { LOGIN_REQUEST, LOGIN_FAILED, loginSuccess, loginFailed } from '../actions';
 
 function login(payload) {
-  return HTTPUtil.post('login', payload);
+  // return HTTPUtil.post('login', payload);
+  return {
+    status: 'ok',
+    access_token: 'LAIJFG01234N-ASDHOQ;WDEQ04'
+  };
 }
 
 function* loginRequest({type, payload = {}}) {
