@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {Map} from 'immutable';
+// action creator
 import { dashboardTestRequest } from './actions';
 
 import styled,{keyframes} from 'styled-components';
@@ -52,13 +54,13 @@ class Dashboard extends Component {
  */
 Dashboard.propTypes = {
   $$testData: PropTypes.string.isRequired,
-  $$dashboardReducer: PropTypes.object.isRequired,
+  $$dashboardReducer: PropTypes.instanceOf(Map).isRequired,
   dashboardTestRequest: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    $$testData: state.getIn(['dashboardReducer', 'testData']),
+    testData: state.getIn(['dashboardReducer', 'testData'], 'default test data'),
     $$dashboardReducer: state.get('dashboardReducer')
   };
 }
