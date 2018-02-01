@@ -1,0 +1,51 @@
+/*reset css*/
+* {
+    box-sizing: border-box;
+}
+
+ol, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    font-size: 16px;
+}
+
+/*remove yellow bg in pwd input of chrome*/
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+/*全局替换 antd 的 style*/
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background: rgb(48, 55, 67);
+}
+.ant-table-pagination.ant-pagination {
+    float: none;
+    /*原 float: right*/
+}
+.ant-modal-footer {
+    padding: 20px;
+}
+.dsm-sider .ant-layout-sider-trigger .anticon {
+    line-height: inherit;
+    /*原 line-height: 1;*/
+}
+/*
+.ant-menu-vertical .ant-menu-submenu-title {
+    margin: 0;
+}*/
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background-color: #2f3742;
+}
+.ant-menu-inline-collapsed {
+    width: auto;
+    /*原 width: 80px;*/
+}
+.ant-menu-inline-collapsed > .ant-menu-item, .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+    /*原 padding: 0 32px !important;*/
+    padding: 0 !important;
+    text-align: center; /*实现居中*/
+}

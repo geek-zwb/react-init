@@ -1,19 +1,19 @@
-// basic
-import React, { Component } from 'react';
+/**
+ * @file layout组件~ 所有 auth 为 true 的组件，都会被包裹在这个组件中
+ */
 
-// route
+// lib
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Layout, Breadcrumb } from 'antd';
+import styled, { keyframes } from 'styled-components';
 
 // global func
 import { getBreadInfo } from './utils/globalFunc';
 
 // component
-import { Layout, Breadcrumb } from 'antd';
 import SiderMenu from './common/Layout/SiderMenu';
 import RightMenu from './common/Layout/RightMenu';
-
-// style
-import styled, { keyframes } from 'styled-components';
 
 import logo from './logo.svg';
 
@@ -24,7 +24,7 @@ const WrapHeader = styled.header`
   display: flex;
   flex: 1;
   align-items: center;
-  background-color: #007bc2;
+  background-color: #353e42;
   height: 60px;
   position: relative;
   color: #fff;
@@ -32,17 +32,22 @@ const WrapHeader = styled.header`
     color: #fff;
   }
 `;
-// 注意该keyframes 要在使用前定义
-const HeaderLogoSpin = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+const HeaderLogo = styled.div`
+  flex: 0 0 160px;
+  text-align: center;
+  height: 40px;
+  & img {
+    height: 100%;
+    width: auto;
+  }
 `;
-const HeaderLogo = styled.img.attrs({
-  src: logo
-})`
-  flex: 0 0 60px;
-  animation: ${HeaderLogoSpin} infinite 20s linear;
-  height: 60px;
+const ContentBox = styled.div`
+  width: calc(100% + 20px);
+  padding-right: 4px;
+  background-color: #fff;
+  min-height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 @withRouter
@@ -51,56 +56,51 @@ class App extends Component {
     return (
       <Layout style={{height: '100vh', backgroundColor: '#f2f2f4', overflow: 'hidden'}}>
         <WrapHeader>
-          <HeaderLogo/>
+          <HeaderLogo>
+            <img src={logo} alt="Home Page"/>
+          </HeaderLogo>
           {/* 右侧栏 */}
           <RightMenu style={{height: '100%'}}>
           </RightMenu>
         </WrapHeader>
+
         <Layout style={{flexDirection: 'row', height: 'calc(100vh - 110px)', background: '#f2f2f4'}}>
           {/*左侧导航栏*/}
-          <SiderMenu />
+          <SiderMenu
+            style={{flex: '0 0 165px', maxWidth: '200px', minWidth: '165px', width: '165px'}}
+          />
 
           {/*content*/}
           {/*这里写两个 Layout 是为了隐藏滚动条， 遗留问题： box-shadow */}
           <Layout style={{
-            margin: '0 0 0 15px',
+            margin: '0',
             background: 'none',
             position: 'relative',
             overflow: 'hidden',
             // boxShadow: '0 0 10px 8px rgba(0, 0, 0, 0.1)'
           }}>
-            <div
-              style={{
-                width: 'calc(100% + 20px)',
-                paddingRight: '4px',
-                backgroundColor: '#fff',
-                overflowY: 'scroll',
-                overflowX: 'hidden'
-              }}>
-              <Breadcrumb
-                style={{
-                  position: 'absolute',
-                  zIndex: 1,
-                  top: '0',
-                  width: '100%',
-                  padding: '12px',
-                  backgroundColor: '#f2f2f4'
-                }}>
-                {getBreadInfo(this.props.location.pathname).map((item, index) => <Breadcrumb.Item
-                  key={index}>{item}</Breadcrumb.Item>)}
-              </Breadcrumb>
-              <Content style={{background: '#f2f2f4', margin: '42px 0 0', minHeight: 380}}>
-                <div style={{minHeight: 350, backgroundColor: '#fff', borderRadius: '5px'}}>
+            <ContentBox>
+              <Content style={{background: '#f2f2f4', minHeight: 350, height: '100%'}}>
+                <div style={{minHeight: 350, height: '100%', backgroundColor: '#fff', borderRadius: '5px'}}>
                   {this.props.children}
+                  {/*{
+                    // 模块的组件将被包含在此
+                    // 给子组件添加一些公共的 props， 比如 breadInfo, 选择的 application 等
+                    // 子组件判断是否应用改变， 在子组件 componentWillReceiveProps 周期方法中去检测 $$applicationSelected 是否改变
+                    React.Children.map(this.props.children, child =>
+                      React.cloneElement(
+                        child,
+                        {
+                          breadInfo: getBreadInfo(this.props.location.pathname),
+                        }
+                      ))
+                  }*/}
                 </div>
-                <Layout style={{height: '30px', backgroundColor: '#f2f2f4'}}>
-                </Layout>
+                {/*<Layout style={{height: '30px', backgroundColor: '#f2f2f4'}}>
+                </Layout>*/}
               </Content>
-            </div>
+            </ContentBox>
           </Layout>
-
-          {/*right sider*/}
-          <div style={{flex: '0 0 15px'}}></div>
 
         </Layout>
       </Layout>
