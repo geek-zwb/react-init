@@ -6,7 +6,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Input } from 'antd';
+import { Input, Icon } from 'antd';
+import store from 'store';
 
 const Search = Input.Search;
 
@@ -23,28 +24,35 @@ const MenuContent = styled.ul`
   justify-content: flex-end;
   align-items: center;
   & > li {
-    margin-right: 20px;
+    font-size: 16px;
+    padding: 15px 20px;
+    position: relative;
+  }
+  & .menu-ul {
+    margin-right: 12px;
+  }
+  & .menu-ul>span{
+    margin-right: 15px;
   }
 `;
-const MenuUl = styled.ul`
+const MenuUl = styled.div`
+  font-size: 14px;
   position: absolute;
   top: 30px;
-  padding-top: 30px;
-  right: 15px;
-  z-index: 2;
-  color: #fff;
+  padding-top: 24px;
+  right: 0px;
+  z-index: 11;
+  color: #333;
   display: none;
-  & li {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #007bbe;
-    line-height: 40px;
-    text-align: center;
-    margin-bottom: 5px;
-  }
-  & li a {
-    color: #fff;
+  width: calc(100% + 55px);
+  min-width: 200px;
+  box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  & div {
+    background: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .menu-ul:hover & {
     display: block;
@@ -53,38 +61,58 @@ const MenuUl = styled.ul`
 
 @withRouter
 class RightMenu extends Component {
+  constructor(props) {
+    super(props);
+
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(e) {
+    e.preventDefault();
+    store.clearAll();
+    window.location = '/login';
+  }
+
   render() {
+    const {location} = this.props;
+
+    const background = location.pathname.includes('user_center') || location.pathname.includes('setting-center');
+
     return (
       <RightMenuBox style={this.props.style}>
         <MenuContent>
-          <li>
-            <Search
-              placeholder="input search text"
-              style={{width: 200, height: 30}}
-              onSearch={value => console.log(value)}
-            />
-          </li>
-          <li>
+          <li style={{background: location.pathname.includes('notification') && '#2592fc'}}>
             <Link to={'/notification'}>
-              <span className="global-icon icon-xiaoxi"></span>
+              <Icon type="notification" />
             </Link>
           </li>
-          <li className="menu-ul">
-            <span>Admin</span>
+          <li className="menu-ul" onClick={this.dropDownUser}  style={{background: background && '#2592fc'}}>
+            <span className="global-icon icon-user"></span>
+            <span>{store.get('auth') && store.get('auth').username}</span>
             <MenuUl>
-              <li>
-                <span className="global-icon icon-youceyingyongheji"></span>
-              </li>
-              <li>
-                <Link to="/notification">
-                  <span className="global-icon icon-xiaoxi"></span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/login">
-                  <span className="global-icon icon-tuichu"></span>
-                </Link>
-              </li>
+              <div style={{padding: '15px 0 10px'}}>
+                <div style={{flex: '1', textAlign: 'center'}}>
+                  <Link to="/user_center" style={{color: '#999'}}>
+                    <div>
+                      <span style={{fontSize: '25px'}} className="global-icon icon-user"></span>
+                    </div>
+                    <div>个人中心</div>
+                  </Link>
+                </div>
+                <div style={{flex: '1', textAlign: 'center'}}>
+                  <Link to="/setting-center" style={{color: '#999'}}>
+                    <div>
+                      <span style={{fontSize: '25px'}} className="global-icon icon-setting-center"></span>
+                    </div>
+                    <div>设置中心</div>
+                  </Link>
+                </div>
+              </div>
+              <div style={{padding: '15px 0', borderTop: '1px solid #ccc', }}>
+                <a style={{color: '#17a0e7'}} onClick={this.logout}>
+                  退出登录
+                </a>
+              </div>
             </MenuUl>
           </li>
         </MenuContent>

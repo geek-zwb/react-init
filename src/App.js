@@ -5,8 +5,8 @@
 // lib
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Layout, Breadcrumb } from 'antd';
-import styled, { keyframes } from 'styled-components';
+import { Layout } from 'antd';
+import styled from 'styled-components';
 
 // global func
 import { getBreadInfo } from './utils/globalFunc';
