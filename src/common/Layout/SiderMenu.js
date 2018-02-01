@@ -70,7 +70,7 @@ class SiderMenu extends Component {
           </Menu.Item>
           <SubMenu
             key="menu"
-            style={{background: '#f2f2f4'}}
+            // style={{background: '#485164'}}
             title={<span style={{fontSize: '16px'}}><Icon type="user"/><span>一级菜单</span></span>}
           >
             <Menu.Item style={{fontSize: '16px'}} key="/submenu">子菜单</Menu.Item>

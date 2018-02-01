@@ -26,18 +26,6 @@ const routes = [
     component: NoMatch
   },
   {
-    path: '/users',
-    exact: true,
-    auth: true,
-    component: NoMatch
-  },
-  {
-    path: '/permissions',
-    exact: true,
-    auth: true,
-    component: NoMatch
-  },
-  {
     path: '/login',
     exact: true,
     auth: false,

@@ -82,8 +82,8 @@ class App extends Component {
             <ContentBox>
               <Content style={{background: '#f2f2f4', minHeight: 350, height: '100%'}}>
                 <div style={{minHeight: 350, height: '100%', backgroundColor: '#fff', borderRadius: '5px'}}>
-                  {this.props.children}
-                  {/*{
+                  {/*{this.props.children}*/}
+                  {
                     // 模块的组件将被包含在此
                     // 给子组件添加一些公共的 props， 比如 breadInfo, 选择的 application 等
                     // 子组件判断是否应用改变， 在子组件 componentWillReceiveProps 周期方法中去检测 $$applicationSelected 是否改变
@@ -94,7 +94,7 @@ class App extends Component {
                           breadInfo: getBreadInfo(this.props.location.pathname),
                         }
                       ))
-                  }*/}
+                  }
                 </div>
                 {/*<Layout style={{height: '30px', backgroundColor: '#f2f2f4'}}>
                 </Layout>*/}
